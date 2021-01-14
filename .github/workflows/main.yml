@@ -1,0 +1,37 @@
+# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+# 2020年11月30日16:53:51 https://github.com/ddgksf2013/TaskAction/blob/master/youth/Task/youth.js
+
+name: 京喜工厂
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 */1 * * *'
+  watch:
+    types: started
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    if: github.event.repository.owner.id == github.event.sender.id
+    steps:
+      - uses: actions/checkout@v1
+      - name: Use Node.js 10.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 10.x
+      - name: npm install
+        run: |
+          npm install
+      - name: '运行 【京喜工厂】'
+        run: |
+          node ./jd_dreamFactory.js
+        env:
+          JD_COOKIE: ${{ secrets.JD_COOKIE }}
+          JD_DEBUG: ${{ secrets.JD_DEBUG }}
+          JD_USER_AGENT: ${{ secrets.JD_USER_AGENT }}
+          TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+          TG_USER_ID: ${{ secrets.TG_USER_ID }}
+          DREAMFACTORY_NOTIFY_CONTROL: ${{ secrets.DREAMFACTORY_NOTIFY_CONTROL }}
+          DREAM_FACTORY_SHARE_CODES: ${{ secrets.DREAM_FACTORY_SHARE_CODES }}
+          IGNORE_COOKIE_JXGC: ${{ secrets.IGNORE_COOKIE_JXGC }} #京喜工厂禁用某些cookie的执行,因为通知太烦了呀,比如要禁用第2和第四个的执行,则填入[2,4]即可,包含中括号哦
