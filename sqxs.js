@@ -381,7 +381,7 @@ function userinfo() {
                         $.log("【抽奖任务】本次共获得" + drawgold + "金币");
                         $.log("【金币总数】" + result.data.gold);
                         $.log("【总计收益】" + result.data.income + "元");
-						await notify.sendNotify(`${$.sqname}`, `书旗账号 ${$.sqname}\n【阅读任务】本次共获得 ${$.ReadTimes * 3} 金币\n【视频任务】本次共获得${$.vediogold}金币\n【抽奖任务】本次共获得${$.drawgold}金币\n【金币总数】${$.result.data.gold}\n 【总计收益】 ${$.result.data.income}元`);
+			await notify.sendNotify(`${$.sqname}`, `书旗账号 ${$.sqname}\n【阅读任务】本次共获得 ${$.ReadTimes * 3} 金币\n【视频任务】本次共获得${$.vediogold}金币\n【抽奖任务】本次共获得${$.drawgold}金币\n【金币总数】${$.result.data.gold}\n 【总计收益】 ${$.result.data.income}元`);
                     } else {
                         $.log("【金币总数】数据异常," + result.message);
                         //$.log(data);
