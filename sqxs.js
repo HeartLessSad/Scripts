@@ -60,6 +60,7 @@ const jobname = '书旗小说'
 let vediogold = 0;
 let drawgold = 0;
 let sqname;
+let notify = require('./sendNotify');
 !(async() => {
     await all();
 })()
@@ -73,7 +74,6 @@ let sqname;
 async function all() {
     //nodejs运行
     if ($.isNode()) {
-        let notify = require('./sendNotify');
         let sqxsck = require('./sqxsck.json');
         let CountNumber = sqxsck.settings[1].val;
         $.log(`============ 共 ${CountNumber} 个${jobname}账号=============`);
@@ -85,15 +85,15 @@ async function all() {
                 vediodrawprizeckArr = sqxsck.datas[3 + 6 * i].val.split('&&');
                 drawckArr = sqxsck.datas[4 + 6 * i].val.split('&&');
                 userinfock = sqxsck.datas[5 + 6 * i].val;
-				if ( ${i+1} == 1)
+				if ( i == 0)
 					sqname = '草莓酸奶酱';
-				if ( ${i+1} == 2)
+				if ( i == 1)
 					sqname = '1783990';
-				if ( ${i+1} == 3)
+				if ( i == 2)
 					sqname = '柚旅时光机';
-				if ( ${i+1} == 4)
+				if ( i == 3)
 					sqname = '忘忧浮云';
-				if ( ${i+1} == 5)
+				if ( i == 4)
 					sqname = '有心';
                 $.log(`\n============ 【书旗小说${i+1}】=============`);
                 ReadTimes = 0;
@@ -381,7 +381,8 @@ function userinfo() {
                         $.log("【抽奖任务】本次共获得" + drawgold + "金币");
                         $.log("【金币总数】" + result.data.gold);
                         $.log("【总计收益】" + result.data.income + "元");
-			await notify.sendNotify(`${$.sqname}`, `书旗账号 ${$.sqname}\n【阅读任务】本次共获得 ${$.ReadTimes * 3} 金币\n【视频任务】本次共获得${$.vediogold}金币\n【抽奖任务】本次共获得${$.drawgold}金币\n【金币总数】${$.result.data.gold}\n 【总计收益】 ${$.result.data.income}元`);
+						
+						await notify.sendNotify(`书旗小说`, `书旗账号 ${sqname} \n【阅读任务】本次共获得 ${ReadTimes*3} 金币\n【视频任务】本次共获得${vediogold}金币\n【抽奖任务】本次共获得${drawgold}金币\n【金币总数】${result.data.gold}\n【总计收益】 ${result.data.income}元`);
                     } else {
                         $.log("【金币总数】数据异常," + result.message);
                         //$.log(data);
