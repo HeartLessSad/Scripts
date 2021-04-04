@@ -66,7 +66,7 @@ https://raw.githubusercontent.com/age174/-/main/feizao.box.json
 */
 
 const $ = new Env('云扫码')
-let ysm = $.getjson('ysm', [])
+let ysm =  require('./ysmzh.json');
 let needNotice = $.getval('ysmNotice') == 'true'
 let ysmBanfirstTask = $.getval('ysmBanfirstTask') == 'true' // 禁止脚本执行首个任务，避免每日脚本跑首次任务导致微信限制
 let ysmBanhalfTask = $.getval('ysmBanhalfTask') == 'true' // 脚本执行完第50个任务时退出任务，再手动阅读2篇避免出现微信限制
