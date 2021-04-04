@@ -72,6 +72,7 @@ let wkzzurl = '', wkzzhd = '',id = '',uid='',tid='',name=''
      wkzhh = process.env.WKZHH.split('\n');
     $.log(`------------- 共${wkzhu.length}个账号-------------\n`)
     for (let i = 0; i < wkzhu.length; i++) {
+      $.log(wkzhh[i])
       wkzzurl = wkzhu[i]
       wkzzhd = wkzhh[i]
       $.log(`\n开始【微客众智${i + 1}】`)
