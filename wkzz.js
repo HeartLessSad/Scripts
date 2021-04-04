@@ -60,21 +60,18 @@ hostname = wx.tiantianaiyuedu.site
 
 
 const $ = new Env('微客众智自动阅读');
-let wkzhu = ['','',]
-let wkzhh = ['','',]
+const wkzz = $.getjson('wkzz', [])
 let times = Math.round(Date.now() / 1000)
 let wkzzurl = '', wkzzhd = '',id = '',uid='',tid='',name=''
 !(async () => {
   if (typeof $request !== "undefined") {
     await wkzzck()
   } else {
-     wkzhu = process.env.WKZHU.split('\n');
-     wkzhh = process.env.WKZHH.split('\n');
-    $.log(`------------- 共${wkzhu.length}个账号-------------\n`)
-    for (let i = 0; i < wkzhu.length; i++) {
-      $.log(wkzhh[i])
-      wkzzurl = wkzhu[i]
-      wkzzhd = wkzhh[i]
+    let acList = wkzz.filter(o => o.id && o.hd).map((o, i) => ({no: i + 1, id: o.id, url: o.url, hd: o.hd}))
+    $.log(`------------- 共${acList.length}个账号-------------\n`)
+    for (let i = 0; i < acList.length; i++) {
+      wkzzurl = acList[i].url
+      wkzzhd = acList[i].hd
       $.log(`\n开始【微客众智${i + 1}】`)
       let userInfo = await getUserInfo(wkzzhd)
       id = userInfo.wxuser_id
